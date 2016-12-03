@@ -1,0 +1,22 @@
+body{
+    background: black;
+    color: white;
+    font-family: "Source Code Pro", "arial  ";
+}
+
+#main-card, #secondary-card{
+    display:table;
+    width: 90%;
+    border-radius: 10px;
+    text-align: center;
+    height: 90vh;
+    background: brown;
+    margin:  auto;
+
+}
+
+.word-container{
+    display:table-cell;
+    vertical-align:middle;
+    font-size: 35px;
+}
