@@ -4,19 +4,25 @@ body{
     font-family: "Source Code Pro", "arial  ";
 }
 
+#card{
+
+    width: 90%;
+    height: 90vh;
+    margin: 0 auto;
+}
+
 #main-card, #secondary-card{
     display:table;
-    width: 90%;
     border-radius: 10px;
+
+    font-size: 35px;
     text-align: center;
-    height: 90vh;
     background: brown;
-    margin:  auto;
+
 
 }
 
 .word-container{
     display:table-cell;
     vertical-align:middle;
-    font-size: 35px;
 }
