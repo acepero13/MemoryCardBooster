@@ -1,27 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="css/app.css" />
+    <link rel="stylesheet" href="app/css/app.css" />
 
     <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
         <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
         <script src="https://cdn.rawgit.com/nnattawat/flip/master/dist/jquery.flip.min.js"></script>
-        <script src="js/animations.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+        <script src="app/js/animations.js"></script>
+        <script src="app/modules/card/CardModule.js"></script>
+    <script src="app/modules/card/services/CardService.js"></script>
+        <script src="app/modules/card/controllers/Card.js"></script>
     <script>if (window.module) module = window.module;</script>
     <meta charset="UTF-8">
     <title>Hello World!</title>
 </head>
-<body>
+<body ng-app="CardModule" ng-controller="CardController as card">
 <div id="card">
     <div id="main-card" class="front">
         <div class="word-container">
-            <h1 class="main-word">Hallo</h1>
+            <h1 class="main-word">{{card.primary_card}}</h1>
         </div>
     </div>
 
     <div id="secondary-card" class="back">
         <div class="word-container">
-            <h1 class="main-word">Hola</h1>
+            <h1 class="main-word">{{card.secondary_card}}</h1>
         </div>
     </div>
 </div>

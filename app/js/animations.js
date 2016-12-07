@@ -5,6 +5,6 @@ jQuery( document ).ready(function() {
     // Handler for .ready() called.
     jQuery("#card").flip({
         axis: 'x',
-        trigger: 'click'
+        trigger: 'click' // use manual
     });
 });
