@@ -11,5 +11,4 @@ cardModule.controller('CardController', function ($rootScope, $scope, CardRespos
       $scope.getPreviousCard = function () {
           $scope.card = CardRespository.getPreviousCard();
       };
-
 });

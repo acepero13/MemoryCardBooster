@@ -2,7 +2,6 @@
 /**
  * Created by alvaro on 12/6/16.
  */
-
 describe('Testing CardController Repository Has Next' ,function () {
     var scope = {};
     var ctrl;
