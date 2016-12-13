@@ -10,7 +10,8 @@
         <script src="app/js/animations.js"></script>
         <script src="db/database.js"></script>
         <script src="app/modules/card/CardModule.js"></script>
-    <script src="app/modules/card/services/CardService.js"></script>
+        <script src="app/modules/card/services/CardService.js"></script>
+        <script src="app/modules/card/services/CardIteratorService.js"></script>
         <script src="app/modules/card/controllers/Card.js"></script>
     <script>if (window.module) module = window.module;</script>
     <meta charset="UTF-8">
@@ -29,6 +30,11 @@
             <h1 class="main-word">{{card.secondary_card}}</h1>
         </div>
     </div>
+</div>
+<div class="controls">
+    <div id="next" ng-click="getNextCard()">Next</div>
+
+    <div id="previous" ng-click="getPreviousCard()">Previous</div>
 </div>
 </body>
 </html>

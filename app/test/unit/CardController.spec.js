@@ -56,10 +56,11 @@ describe('Testing CardController Repository Has Next' ,function () {
 describe('Testing CardController Repository Does not has Next' ,function () {
     var scope = {};
     var ctrl;
-    var q ;
+    var rootScope ;
     beforeEach(module('CardModule'));
     function createController($rootScope, $controller, cardRepository) {
         scope = $rootScope.$new();
+        rootScope = $rootScope;
         ctrl = $controller('CardController', {$scope: scope, CardIteratorRespository: cardRepository});
     }
 
@@ -72,17 +73,17 @@ describe('Testing CardController Repository Does not has Next' ,function () {
 
     describe('When getNextCard', function () {
         it('should throw Item has no next', function () {
-            expect(function () {
-                scope.getNextCard();
-            }).toThrow(new Error('Item has no next'));
+            scope.getNextCard();
+            rootScope.$apply();
+            expect(scope.card.primary_card).toBe("");
         });
     });
 
     describe('When getPreviousCard', function () {
         it('should throw I am the first card', function () {
-            expect(function () {
-                scope.getPreviousCard();
-            }).toThrow(new Error('I am the first card'));
+            scope.getPreviousCard();
+            rootScope.$apply();
+            expect(scope.card.primary_card).toBe("");
         });
     });
 
@@ -110,14 +111,13 @@ function getCardFakeRepository($q) {
 }
 
 
-function getCardEmptyFakeRepository() {
+function getCardEmptyFakeRepository($q) {
     return {
-
         getNextCard: function () {
-           throw  new Error('Item has no next');;
+            return $q.reject(new Error('Item has no next'));
         },
         getPreviousCard: function () {
-            throw  new Error('I am the first card');;
+            return $q.reject(new Error('I am the first card'));
         }
     };
 }

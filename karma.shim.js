@@ -6,5 +6,6 @@ window.process = window.top.process;
 window.__dirname = window.top.__dirname;
 require = window.require;
 
-process.env.debug = true;
 require("module").globalPaths.push("node_modules");
+
+process.env.debug = true;

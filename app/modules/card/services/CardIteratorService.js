@@ -9,32 +9,52 @@ cardModule.service('CardIteratorRespository',    function (CardRespository, $q, 
     console.log(CardRespository);
     this.cardRepository = CardRespository;
 
-    function initializeStudyCard(defer, repo) {
-        repo.getStudyCardSet().
+
+    this.initializeStudyCard = function(defer) {
+        this.cardRepository.getStudyCardSet().
             then(function (cards) {
-                console.log(cards.length);
                 cardDeck = new CardIterator(cards);
                 defer.resolve(cardDeck.next());
             });
-    }
+    };
+
 
     this.getNextCard = function () {
         var defer = $q.defer();
-        if(isDeckEmpty()){
-            initializeStudyCard(defer, this.cardRepository);
+        if(this.isDeckEmpty()){
+            this.initializeStudyCard(defer);
             return defer.promise;
         }
-        return $q.when(cardDeck.next());
+        return tryToGetNextCard();
     };
+
+    function tryToGetNextCard() {
+        try{
+            var card = cardDeck.next();
+            return $q.when(card);
+        }catch (e){
+            return $q.when(cardDeck.first());
+        }
+    }
 
     this.getPreviousCard = function () {
-        if(isDeckEmpty()){
+        if(this.isDeckEmpty()){
             return $q.reject(new Error('Item has no previous'));
         }
-        return $q.when(cardDeck.previous());
+        return tryToGetPrevious();
     };
 
-    function isDeckEmpty() {
+    function tryToGetPrevious() {
+        try{
+            var card = cardDeck.previous();
+            console.log(cardDeck.items);
+            return $q.when(card);
+        }catch (e){
+            return $q.reject(e);
+        }
+    }
+
+    this.isDeckEmpty = function() {
         return cardDeck.length <= 0 ;
     }
 });

@@ -11,7 +11,8 @@ function loadDB() {
         db = {};
     var storage = base_dir + '/db/MemoryBooster_test.db';
     var model_path = 'db/models';
-    if (process.env.debug == true) {
+    if (window.process.env.debug == true) {
+        console.log("DEBUG")
         storage = base_dir + '/db/MemoryBooster_test.db';
     }
     sequelize = new Sequelize('MemoryBooster-db', null, null, {

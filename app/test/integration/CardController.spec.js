@@ -59,6 +59,36 @@ describe('Integration Testing CardController ' ,function () {
                 done();
             },15)
         });
+    });
+
+
+    describe('When getPreviousCard', function () {
+        it('should have a first Card', function (done) {
+            scope.getNextCard();
+            setTimeout(function () {
+                scope.getNextCard();
+                scope.getNextCard();
+                rootScope.$apply();
+                expect(scope.card.primary_card).toBe("Card 1");
+                done();
+            },15)
+
+        });
+
+    });
+
+    describe('When getPreviousCard', function () {
+        it('should have a first Card', function (done) {
+            scope.getNextCard();
+            setTimeout(function () {
+                scope.getPreviousCard();
+                scope.getPreviousCard();
+                scope.getPreviousCard();
+                expect(scope.card.primary_card).toBe("Hallo");
+                done();
+            },15)
+
+        });
 
     });
 
@@ -70,7 +100,6 @@ function fillCardController() {
         Card.build({id: 1, primary_card: 'Card 1', secondary_card: 'Seconday Card 1'}).save();
        return  Card.build({id: 2, primary_card: 'Card 2', secondary_card: 'Seconday Card 2'}).save();
     }
-
     return Card.destroy({truncate: true}).then(createTwoCards);
 }
 

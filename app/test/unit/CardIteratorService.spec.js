@@ -20,26 +20,30 @@ describe("Integration testing for CardServiceIterator With Cards", function () {
     }));
 
     it('should return have a list of cards (1)', function (done) {
-
-        setTimeout(function(){
-            rootScope.$digest();
-            var deck = cardService.getNextCard();
-//            expect(deck.next().primary_card).toBe('Card1');
+        rootScope.$digest();
+        cardService.getNextCard().then(function (card) {
+            expect(card.primary_card).toBe('Card1');
             done();
-        }, 20);
+        });
+    });
 
-
-
+    it('should return have a list of cards (1)', function (done) {
+        rootScope.$digest();
+        cardService.getNextCard().then(function (card) {
+            expect(card.primary_card).toBe('Card1');
+            done();
+        });
     });
 
 });
 
-function getFakeRepository($q) {
+function getFakeRepository($q, rootScope) {
     return {
         getStudyCardSet:function () {
             var defer = $q.defer();
             setTimeout(function(){
                 defer.resolve([{'primary_card': 'Card1', 'secondary_card' : 'Secondary Card 1'}]);
+                rootScope.$digest();
             }, 2);
             return defer.promise;
         }
