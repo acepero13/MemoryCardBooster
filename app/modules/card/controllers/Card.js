@@ -1,14 +1,20 @@
 /**
  * Created by alvaro on 12/6/16.
  */
-cardModule.controller('CardController', function ($rootScope, $scope, CardRespository) {
+cardModule.controller('CardController', function ($rootScope, $scope, CardIteratorRespository) {
       $scope.card = {primary_card: "Hallo", secondary_card: "Hola"};
-
       $scope.getNextCard = function() {
-          $scope.card = CardRespository.getNextCard();
+          CardIteratorRespository.getNextCard().then(function (card) {
+              $scope.card = card;
+          });
       };
 
       $scope.getPreviousCard = function () {
-          $scope.card = CardRespository.getPreviousCard();
+          CardIteratorRespository.getPreviousCard().then(function (card) {
+              $scope.card = card;
+          }, function (err) {
+              console.log(err);
+              $scope.card = {primary_card: "", secondary_card: ""};
+          });
       };
 });

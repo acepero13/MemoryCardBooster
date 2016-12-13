@@ -36,7 +36,7 @@ module.exports = function(config) {
       plugins: [
           'karma-electron',
           'karma-jasmine',
-         // 'karma-coverage'
+          'karma-coverage'
       ],
 
 
@@ -50,7 +50,7 @@ module.exports = function(config) {
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
       preprocessors: {
           '*.js': ['electron' ],
-        //  'app/modules/**/**/*.js': [ 'coverage'],
+          'app/modules/**/**/*.js': [ 'coverage'],
       },
 
 

@@ -5,15 +5,17 @@
 describe('Testing CardController Repository Has Next' ,function () {
     var scope = {};
     var ctrl;
+    var rootScope;
     beforeEach(module('CardModule'));
     function createController($rootScope, $controller, cardRepository) {
         scope = $rootScope.$new();
-        ctrl = $controller('CardController', {$scope: scope, CardRespository: cardRepository});
+        ctrl = $controller('CardController', {$scope: scope, CardIteratorRespository: cardRepository});
     }
 
-    beforeEach(inject(function ($controller, $rootScope) {
-        var cardRepository = getCardFakeRepository();
+    beforeEach(inject(function ($controller, $rootScope,$q, $rootScope) {
+        var cardRepository = getCardFakeRepository($q);
         createController($rootScope, $controller, cardRepository);
+        rootScope = $rootScope;
     }));
 
     describe('When initializing controllers', function () {
@@ -23,16 +25,28 @@ describe('Testing CardController Repository Has Next' ,function () {
     });
 
     describe('When getNextCard', function () {
-        it('should have a new Card defined', function () {
+        it('should have a new Card defined', function (done) {
             scope.getNextCard();
-            expect(scope.card.primary_card).toBe("Card");
+            setTimeout(function () {
+                rootScope.$apply();
+                expect(scope.card.primary_card).toBe("Hallo1");
+
+                done();
+            },50)
+
         });
     });
 
     describe('When getPreviousCard', function () {
-        it('should have a previous Card defined', function () {
+        it('should have a previous Card defined', function (done) {
             scope.getPreviousCard();
-            expect(scope.card.primary_card).toBe("Hallo");
+            setTimeout(function () {
+                rootScope.$apply();
+                expect(scope.card.primary_card).toBe("Hallo0");
+
+                done();
+            },50)
+
         });
     });
 
@@ -42,24 +56,25 @@ describe('Testing CardController Repository Has Next' ,function () {
 describe('Testing CardController Repository Does not has Next' ,function () {
     var scope = {};
     var ctrl;
+    var q ;
     beforeEach(module('CardModule'));
     function createController($rootScope, $controller, cardRepository) {
         scope = $rootScope.$new();
-        ctrl = $controller('CardController', {$scope: scope, CardRespository: cardRepository});
+        ctrl = $controller('CardController', {$scope: scope, CardIteratorRespository: cardRepository});
     }
 
-    beforeEach(inject(function ($controller, $rootScope) {
-        var cardRepository = getCardEmptyFakeRepository();
+    beforeEach(inject(function ($controller, $rootScope, $q) {
+        var cardRepository = getCardEmptyFakeRepository($q);
         createController($rootScope, $controller, cardRepository);
     }));
 
 
 
     describe('When getNextCard', function () {
-        it('should throw I do not have more cards', function () {
+        it('should throw Item has no next', function () {
             expect(function () {
                 scope.getNextCard();
-            }).toThrow(new Error('I do not have more cards'));
+            }).toThrow(new Error('Item has no next'));
         });
     });
 
@@ -73,15 +88,23 @@ describe('Testing CardController Repository Does not has Next' ,function () {
 
 });
 
-function getCardFakeRepository() {
+function getCardFakeRepository($q) {
     return {
         getNextCard: function () {
-            var cards = [{primary_card: "Hallo", secondary_card: "Hola"}, {primary_card: "Card", secondary_card: "Karte"}]
-            return cards[1];
+            var defer = $q.defer();
+            setTimeout(function(){
+                defer.resolve({primary_card: "Hallo1", secondary_card: "Hola1"});
+            }, 2);
+            return defer.promise;
         },
+
         getPreviousCard: function () {
-            var cards = [{primary_card: "Hallo", secondary_card: "Hola"}, {primary_card: "Card", secondary_card: "Karte"}]
-            return cards[0];
+            var defer = $q.defer();
+            setTimeout(function(){
+                defer.resolve({primary_card: "Hallo0", secondary_card: "Hola0"});
+            }, 2);
+            return defer.promise;
+
         }
     };
 }
@@ -89,8 +112,9 @@ function getCardFakeRepository() {
 
 function getCardEmptyFakeRepository() {
     return {
+
         getNextCard: function () {
-           throw  new Error('I do not have more cards');;
+           throw  new Error('Item has no next');;
         },
         getPreviousCard: function () {
             throw  new Error('I am the first card');;
