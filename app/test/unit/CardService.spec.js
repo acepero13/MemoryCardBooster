@@ -49,7 +49,6 @@ describe("Integration testing for CardService Without Cards", function () {
     it('should return an empty List', function (done) {
         var result = cardService.getStudyCardSet();
         result.then(function (result) {
-            console.log('Res:' + result);
             expect(result.length).toBe(0);
             done();
         });

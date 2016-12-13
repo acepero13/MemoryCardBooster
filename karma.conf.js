@@ -25,8 +25,8 @@ module.exports = function(config) {
         {pattern: 'index.html',include:false},
         {pattern: 'app/modules/card/*.js',include:false},
         {pattern: 'app/modules/card/controllers/*.js',include:false},
-
         {pattern: 'app/modules/card/services/*.js',include:false},
+        {pattern: 'app/modules/card/util/*.js',include:false},
         {pattern: 'app/test/unit/*.js',include:false},
         //'test-main.js'
 
