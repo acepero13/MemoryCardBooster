@@ -26,8 +26,9 @@ CardIterator.prototype = {
     },
     previous: function() {
         if(this.index > 1){
-            this.index = this.index - PREVIOUS_INDEX;
-            return this.items[this.index];
+            var previousCard = this.items[this.index - PREVIOUS_INDEX];
+            this.index = this.index - 1;
+            return previousCard;
         }
         throw Error('Item has no previous');
     },

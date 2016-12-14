@@ -18,7 +18,6 @@ cardModule.service('CardIteratorRespository',    function (CardRespository, $q, 
             });
     };
 
-
     this.getNextCard = function () {
         var defer = $q.defer();
         if(this.isDeckEmpty()){
