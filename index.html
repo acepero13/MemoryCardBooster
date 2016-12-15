@@ -4,48 +4,70 @@
     <link rel="stylesheet" href="app/css/app.css" />
 
     <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+        <script src="https://use.fontawesome.com/81a51149ea.js"></script>
         <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
         <script src="https://cdn.rawgit.com/nnattawat/flip/master/dist/jquery.flip.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+        <script src="app/js/event_binding.js"></script>
         <script src="app/js/animations.js"></script>
         <script src="app/js/dock.js"></script>
         <script src="db/database.js"></script>
+
+        <script src="app/modules/image/ImageModule.js"></script>
+        <script src="app/modules/image/services/GoogleImageService.js"></script>
+        <script src="app/modules/image/services/DummyGoogleImageService.js"></script>
+        <script src="app/modules/image/controllers/Image.js"></script>
+
         <script src="app/modules/card/CardModule.js"></script>
         <script src="app/modules/card/services/CardService.js"></script>
         <script src="app/modules/card/services/CardIteratorService.js"></script>
         <script src="app/modules/card/controllers/Card.js"></script>
     <script>if (window.module) module = window.module;</script>
+    <script>angular.module("CombineModule", ["CardModule", "ImageModule"]);</script>
     <meta charset="UTF-8">
     <title>Hello World!</title>
 </head>
-<body ng-app="CardModule" ng-controller="CardController as card">
+<body ng-app="CardModule" >
 <div class="main-container">
-    <div id="dock-header">
+    <div id="dock-header"  ng-controller="ImageController as image">
         <div id="dock-content">
             <div class="image-search">
-                <input class="input medium" type="text" placeholder="Search online image"/>
+                <input class="input medium" type="text" id="search-google-image" placeholder="Search online image: {{card.primary_card}}"
+                       ng-model="keyword" ng-keyup="$event.keyCode == 13 ? getGooglePossibleImages() : null" />
             </div>
+
+            <div id="images-container">
+                <div ng-repeat="img in possibleImages" class="image-grid">
+                    <div class="thumbnail"> <img src="{{img.thumbnail.url}}" width="128" height="128"/></div>
+                </div>
+            </div>
+        </div>
+        <div id="bottom-dock">
+            <i class="fa fa-chevron-up" aria-hidden="true" onclick="goUp()"></i>
         </div>
     </div>
-    <div id="card">
-        <div id="main-card" class="front">
-            <div class="word-container">
-                <h1 class="main-word">{{card.primary_card}}</h1>
+
+    <div id="card-container" ng-controller="CardController as card">
+        <div id="card" >
+            <div id="main-card" class="front">
+                <div class="word-container">
+                    <h1 class="main-word">{{card.primary_card}}</h1>
+                </div>
+            </div>
+
+            <div id="secondary-card" class="back">
+                <div class="word-container">
+                    <h1 class="main-word">{{card.secondary_card}}</h1>
+                </div>
             </div>
         </div>
+        <div class="controls">
+            <div id="next" ng-click="getNextCard()">Next</div>
 
-        <div id="secondary-card" class="back">
-            <div class="word-container">
-                <h1 class="main-word">{{card.secondary_card}}</h1>
-            </div>
+            <div id="previous" ng-click="getPreviousCard()">Previous</div>
+
+            <div id="image-dock" onclick="displayTopDialog()">Previous</div>
         </div>
-    </div>
-    <div class="controls">
-        <div id="next" ng-click="getNextCard()">Next</div>
-
-        <div id="previous" ng-click="getPreviousCard()">Previous</div>
-
-        <div id="image-dock" onclick="displayTopDialog()">Previous</div>
     </div>
 </div>
 </body>

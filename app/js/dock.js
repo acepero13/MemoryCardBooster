@@ -8,3 +8,11 @@ function displayTopDialog() {
         jQuery('#dock-content').css('display', 'block');
     });
 }
+
+function goUp() {
+    jQuery('#dock-header').animate({
+        height: '0px', display: 'block'
+    }).promise().done(function () {
+        jQuery('#dock-content').css('display', 'none');
+    });
+}

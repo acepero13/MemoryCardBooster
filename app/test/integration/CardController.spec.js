@@ -29,7 +29,7 @@ describe('Integration Testing CardController ' ,function () {
                 rootScope.$apply();
                 expect(scope.card.primary_card).toBe("Card 1");
                 done();
-            },5)
+            },15)
 
         });
     });

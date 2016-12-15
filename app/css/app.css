@@ -71,3 +71,23 @@ body{
     margin-top: 2px;
     margin-left: 2px;
 }
+
+#bottom-dock{
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    font-size: 36px;
+}
+
+.image-grid .thumbnail{
+    float: left;
+    border: 1px solid silver;
+    margin-left: 5px;
+    width: 128px;
+    height: 128px;
+    margin-top: 5px;
+}
+
+#images-container{
+    margin-top: 20px;
+}

@@ -3,9 +3,11 @@
  */
 cardModule.controller('CardController', function ($rootScope, $scope, CardIteratorRespository) {
       $scope.card = {primary_card: "Hallo", secondary_card: "Hola"};
+      $rootScope.card = $scope.card;
       $scope.getNextCard = function() {
           CardIteratorRespository.getNextCard().then(function (card) {
               $scope.card = card;
+              $rootScope.card = $scope.card;
           }, function (err) {
               $scope.card = {primary_card: "", secondary_card: ""};
           });
@@ -14,6 +16,7 @@ cardModule.controller('CardController', function ($rootScope, $scope, CardIterat
       $scope.getPreviousCard = function () {
           CardIteratorRespository.getPreviousCard().then(function (card) {
               $scope.card = card;
+              $rootScope.card = $scope.card;
           }, function (err) {
               $scope.card = {primary_card: "", secondary_card: ""};
           });

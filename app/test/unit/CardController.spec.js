@@ -30,7 +30,6 @@ describe('Testing CardController Repository Has Next' ,function () {
             setTimeout(function () {
                 rootScope.$apply();
                 expect(scope.card.primary_card).toBe("Hallo1");
-
                 done();
             },5)
 
