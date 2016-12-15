@@ -32,7 +32,7 @@ describe('Testing CardController Repository Has Next' ,function () {
                 expect(scope.card.primary_card).toBe("Hallo1");
 
                 done();
-            },50)
+            },5)
 
         });
     });
@@ -45,7 +45,7 @@ describe('Testing CardController Repository Has Next' ,function () {
                 expect(scope.card.primary_card).toBe("Hallo0");
 
                 done();
-            },50)
+            },5)
 
         });
     });

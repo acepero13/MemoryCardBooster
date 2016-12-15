@@ -29,7 +29,7 @@ describe('Integration Testing CardController ' ,function () {
                 rootScope.$apply();
                 expect(scope.card.primary_card).toBe("Card 1");
                 done();
-            },15)
+            },5)
 
         });
     });
@@ -43,7 +43,7 @@ describe('Integration Testing CardController ' ,function () {
                 rootScope.$apply();
                 expect(scope.card.primary_card).toBe("Card 1");
                 done();
-            },15)
+            },5)
 
         });
 
@@ -57,7 +57,7 @@ describe('Integration Testing CardController ' ,function () {
                 rootScope.$apply();
                 expect(scope.card.primary_card).toBe("");
                 done();
-            },15)
+            },5)
         });
     });
 
@@ -71,7 +71,7 @@ describe('Integration Testing CardController ' ,function () {
                 rootScope.$apply();
                 expect(scope.card.primary_card).toBe("Card 1");
                 done();
-            },15)
+            },5)
 
         });
 
@@ -86,7 +86,7 @@ describe('Integration Testing CardController ' ,function () {
                 scope.getPreviousCard();
                 expect(scope.card.primary_card).toBe("Hallo");
                 done();
-            },15)
+            },5)
 
         });
 
