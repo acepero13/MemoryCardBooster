@@ -17,6 +17,7 @@
         <script src="app/modules/image/services/GoogleImageService.js"></script>
         <script src="app/modules/image/services/DummyGoogleImageService.js"></script>
         <script src="app/modules/image/controllers/Image.js"></script>
+        <script src="app/modules/image/util/FileDroper.js"></script>
 
         <script src="app/modules/card/CardModule.js"></script>
         <script src="app/modules/card/services/CardService.js"></script>
@@ -37,8 +38,13 @@
             </div>
 
             <div id="images-container">
-                <div ng-repeat="img in possibleImages" class="image-grid">
-                    <div class="thumbnail"> <img src="{{img.thumbnail.url}}" width="128" height="128"/></div>
+
+                <div ng-if="possibleImages.length > 0" ng-repeat="img in possibleImages" class="image-grid">
+                    <div class="thumbnail"> <img src="{{img.thumbnail.url}}" width="128" height="128" ng-click="selectImage($index)"/></div>
+                </div>
+
+                <div id="file-drop" imagedrop on-image-drop="imageDropped()">
+                    Drop an image here to upload
                 </div>
             </div>
         </div>

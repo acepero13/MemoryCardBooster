@@ -9,7 +9,7 @@ function loadDB() {
         Sequelize = require('sequelize'),
         sequelize = null,
         db = {};
-    var storage = base_dir + '/db/MemoryBooster.db';
+    var storage = base_dir + '/db/MemoryBooster_test.db';
     var model_path = 'db/models';
     if (window.process.env.debug == true) {
         storage = base_dir + '/db/MemoryBooster_test.db';
