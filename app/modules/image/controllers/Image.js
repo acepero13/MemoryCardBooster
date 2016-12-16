@@ -26,7 +26,7 @@ imageModule.controller('ImageController', function ($rootScope, $scope, GoogleIm
     };
 
     $scope.imageDropped = function(){
-      console.log( $scope.uploadedFile);
+
     }
 
 });

@@ -26,12 +26,12 @@ module.exports = function(config) {
         {pattern: 'app/modules/card/*.js',include:false},
         {pattern: 'app/modules/card/controllers/*.js',include:false},
         {pattern: 'app/modules/card/services/*.js',include:false},
-        {pattern: 'app/modules/card/util/*.js',include:false},
+        {pattern: 'app/modules/card/lib/*.js',include:false},
 
         {pattern: 'app/modules/image/*.js',include:false},
         {pattern: 'app/modules/image/controllers/*.js',include:false},
         {pattern: 'app/modules/image/services/*.js',include:false},
-        {pattern: 'app/modules/image/util/*.js',include:false},
+        {pattern: 'app/modules/image/lib/*.js',include:false},
         {pattern: 'app/test/unit/*.js',include:false},
         {pattern: 'app/test/integration/*.js',include:false},
         //'test-main.js'
@@ -55,7 +55,8 @@ module.exports = function(config) {
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
       preprocessors: {
           '*.js': ['electron' ],
-          'app/modules/**/**/*.js': [ 'coverage'],
+          'app/modules/**/!(lib)/!(*GoogleImageService).js': [ 'coverage'],
+
       },
 
 

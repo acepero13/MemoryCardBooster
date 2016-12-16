@@ -46,7 +46,6 @@ cardModule.service('CardIteratorRespository',    function (CardRespository, $q, 
     function tryToGetPrevious() {
         try{
             var card = cardDeck.previous();
-            console.log(cardDeck.items);
             return $q.when(card);
         }catch (e){
             return $q.reject(e);

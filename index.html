@@ -17,7 +17,7 @@
         <script src="app/modules/image/services/GoogleImageService.js"></script>
         <script src="app/modules/image/services/DummyGoogleImageService.js"></script>
         <script src="app/modules/image/controllers/Image.js"></script>
-        <script src="app/modules/image/util/FileDroper.js"></script>
+        <script src="app/modules/image/lib/FileDroper.js"></script>
 
         <script src="app/modules/card/CardModule.js"></script>
         <script src="app/modules/card/services/CardService.js"></script>
@@ -43,8 +43,9 @@
                     <div class="thumbnail"> <img src="{{img.thumbnail.url}}" width="128" height="128" ng-click="selectImage($index)"/></div>
                 </div>
 
-                <div id="file-drop" imagedrop on-image-drop="imageDropped()">
-                    Drop an image here to upload
+                <div id="file-drop" >
+                    <label for="file-drop"><strong>Choose a file</strong><span class="box__dragndrop"> or drag it here</span>.</label>
+                    <button class="box__button" type="submit">Upload</button>
                 </div>
             </div>
         </div>

@@ -6,11 +6,11 @@
     "angular2": "2.0.0-beta.21",
     "bootstrap": "^3.3.6",
     "google-images": "^2.0.0",
-    "jasmine": "^2.4.1",
     "karma": "^0.13.16",
     "request": "^2.79.0",
     "sequelize": "^3.27.0",
     "sqlite3": "^3.1.8"
+
   },
   "devDependencies": {
     "chai": "^3.5.0",
@@ -18,8 +18,8 @@
     "jasmine": "^2.5.2",
     "karma": "^0.13.22",
     "karma-chrome-launcher": "^2.0.0",
-    "karma-electron-launcher": "^0.1.0",
     "karma-jasmine": "^1.0.2",
+    "karma-electron-launcher": "^0.1.0",
     "mocha": "^3.2.0",
     "requirejs": "^2.3.2",
     "sequelize": "^3.27.0",
@@ -29,5 +29,9 @@
     "sinon": "^1.17.6",
     "sinon-chai": "^2.8.0",
     "sqlite3": "^3.1.8"
+  },
+
+  "scripts": {
+    "test": "./node_modules/.bin/karma start --single-run --browsers Electron"
   }
 }
