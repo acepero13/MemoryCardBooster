@@ -28,24 +28,34 @@ imageModule.controller('ImageController', function ($rootScope, $scope, GoogleIm
     };
 
     $scope.imageDropped = function(){
+        var fileN = '';
+        if($scope.uploadedFile && $scope.uploadedFile.path.length > 0){
+            fileN = $scope.uploadedFile.path;
+            saveImage(fileN);
 
+        }
     };
     
     $scope.selectDialog = function () {
         const {dialog} = require('electron').remote
         dialog.showOpenDialog(function (fileNames) {
-            var fileName = fileNames[0];
-            console.log(fileName);
-            var fileS = new FileSystem(fileName );
-            var localFileSaver = new Base64LocalFileEncoder(fileS);
-            localFileSaver.encodeFile(fileName).then(function (imageEncoded) {
-                $rootScope.card.image = imageEncoded;
-                $rootScope.card.save();
-            }).catch(function (err) {
-                console.log("Could not encode image")
-            });
+            if(fileNames.length > 0) {
+                var fileName = fileNames[0];
+                saveImage(fileName);
+            }
 
         });
     };
+
+    function saveImage(fileName) {
+        var fileS = new FileSystem(fileName );
+        var localFileSaver = new Base64LocalFileEncoder(fileS);
+        localFileSaver.encodeFile(fileName).then(function (imageEncoded) {
+            $rootScope.card.image = imageEncoded;
+            $rootScope.card.save();
+        }).catch(function (err) {
+            console.log("Could not encode image")
+        });
+    }
 
 });
