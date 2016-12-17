@@ -1,7 +1,9 @@
 /**
  * Created by alvaro on 12/15/16.
  */
-
+var base_path = process.cwd();
+require(base_path + '/app/modules/image/lib/FileSystem/FileSystem.js');
+require(base_path + '/app/modules/image/util/Base64LocalFileEncoder.js');
 imageModule.controller('ImageController', function ($rootScope, $scope, GoogleImageService, DummyGoogleImageService) {
     $scope.card = $rootScope.card;
     $scope.possibleImages = [];
@@ -11,7 +13,6 @@ imageModule.controller('ImageController', function ($rootScope, $scope, GoogleIm
 
     GoogleImageService = DummyGoogleImageService;
     $scope.getGooglePossibleImages = function () {
-        console.log($scope.keyword);
         GoogleImageService.listPossibleImages($scope.keyword).then(function (imageList) {
             $scope.possibleImages = imageList;
         }, function (err) {
@@ -30,11 +31,21 @@ imageModule.controller('ImageController', function ($rootScope, $scope, GoogleIm
 
     };
     
-    /*$scope.selectDialog = function () {
+    $scope.selectDialog = function () {
         const {dialog} = require('electron').remote
         dialog.showOpenDialog(function (fileNames) {
+            var fileName = fileNames[0];
+            console.log(fileName);
+            var fileS = new FileSystem(fileName );
+            var localFileSaver = new Base64LocalFileEncoder(fileS);
+            localFileSaver.encodeFile(fileName).then(function (imageEncoded) {
+                $rootScope.card.image = imageEncoded;
+                $rootScope.card.save();
+            }).catch(function (err) {
+                console.log("Could not encode image")
+            });
 
         });
-    };*/
+    };
 
 });

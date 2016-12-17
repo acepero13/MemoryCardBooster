@@ -14,7 +14,6 @@ describe('Local File Saver Test', function () {
     }));
     beforeEach(function () {
         var fileS = new FileSystem(url );
-        console.log(fileS)
         localFileSaver = new Base64LocalFileEncoder(fileS);
     });
 

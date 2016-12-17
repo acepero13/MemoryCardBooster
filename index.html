@@ -13,6 +13,8 @@
         <script src="app/js/dock.js"></script>
         <script src="db/database.js"></script>
 
+        <script src="app/modules/image/lib/FileSystem/FileSystem.js"></script>
+        <script src="app/modules/image/util/Base64LocalFileEncoder.js"></script>
         <script src="app/modules/image/ImageModule.js"></script>
         <script src="app/modules/image/services/GoogleImageService.js"></script>
         <script src="app/modules/image/services/DummyGoogleImageService.js"></script>
@@ -23,6 +25,7 @@
         <script src="app/modules/card/services/CardService.js"></script>
         <script src="app/modules/card/services/CardIteratorService.js"></script>
         <script src="app/modules/card/controllers/Card.js"></script>
+
     <script>if (window.module) module = window.module;</script>
     <script>angular.module("CombineModule", ["CardModule", "ImageModule"]);</script>
     <meta charset="UTF-8">

@@ -10,6 +10,7 @@ module.exports = function(sequelize, DataTypes) {
         primary_card: DataTypes.TEXT,
         secondary_card: DataTypes.TEXT,
         extras: DataTypes.TEXT,
+        image: DataTypes.BLOB,
         order: {type: DataTypes.INTEGER, defaultValue: 0, allowNull:true}
     }, {
         underscored: true,
