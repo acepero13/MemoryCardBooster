@@ -30,11 +30,11 @@ imageModule.controller('ImageController', function ($rootScope, $scope, GoogleIm
 
     };
     
-    $scope.selectDialog = function () {
+    /*$scope.selectDialog = function () {
         const {dialog} = require('electron').remote
         dialog.showOpenDialog(function (fileNames) {
 
         });
-    };
+    };*/
 
 });

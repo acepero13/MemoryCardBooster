@@ -3,6 +3,6 @@
  */
 var FileSaver = {
     getFile : function(){},
-    saveFile: function (url) {},
+    encodeFile: function (url) {},
     convertFileToText: function () {}
 };
