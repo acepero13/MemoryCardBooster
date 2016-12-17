@@ -91,3 +91,40 @@ body{
 #images-container{
     margin-top: 20px;
 }
+
+.box {
+    font-size: 1.25rem;
+    background-color: #c8dadf;
+    position: relative;
+    padding: 100px 20px;
+}
+
+box .box__icon {
+    width: 100%;
+    height: 80px;
+    fill: #92b0b3;
+    display: block;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.box {
+    outline: 2px dashed #92b0b3;
+    outline-offset: -10px;
+    -webkit-transition: outline-offset .15s ease-in-out, background-color .15s linear;
+    transition: outline-offset .15s ease-in-out, background-color .15s linear;
+}
+
+#file-drop{
+    text-align: center;
+}
+
+.upload-icon{
+    font-size: 42px;
+}
+
+.choose:focus,
+.choose:hover
+{
+    color: #39bfd3;
+}

@@ -1,6 +1,7 @@
 /**
  * Created by alvaro on 12/15/16.
  */
+
 imageModule.controller('ImageController', function ($rootScope, $scope, GoogleImageService, DummyGoogleImageService) {
     $scope.card = $rootScope.card;
     $scope.possibleImages = [];
@@ -27,6 +28,13 @@ imageModule.controller('ImageController', function ($rootScope, $scope, GoogleIm
 
     $scope.imageDropped = function(){
 
-    }
+    };
+    
+    $scope.selectDialog = function () {
+        const {dialog} = require('electron').remote
+        dialog.showOpenDialog(function (fileNames) {
+
+        });
+    };
 
 });

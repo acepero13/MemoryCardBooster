@@ -37,15 +37,20 @@
                        ng-model="keyword" ng-keyup="$event.keyCode == 13 ? getGooglePossibleImages() : null" />
             </div>
 
-            <div id="images-container">
+            <div id="images-container" >
 
                 <div ng-if="possibleImages.length > 0" ng-repeat="img in possibleImages" class="image-grid">
                     <div class="thumbnail"> <img src="{{img.thumbnail.url}}" width="128" height="128" ng-click="selectImage($index)"/></div>
                 </div>
 
-                <div id="file-drop" >
-                    <label for="file-drop"><strong>Choose a file</strong><span class="box__dragndrop"> or drag it here</span>.</label>
-                    <button class="box__button" type="submit">Upload</button>
+                <div id="file-drop"  imagedrop  on-image-drop="imageDropped()" ng-show="possibleImages.length <= 0">
+                    <div class="box" >
+                        <div class="upload-icon">
+                            <i class="fa fa-upload "></i>
+                        </div>
+                        <br />
+                        <label for="file-drop"><strong class="choose" ng-click="selectDialog()">Choose a file</strong><span class="box__dragndrop"> or drag it here</span>.</label>
+                    </div>
                 </div>
             </div>
         </div>
