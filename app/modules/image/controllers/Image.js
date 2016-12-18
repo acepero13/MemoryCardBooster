@@ -11,7 +11,7 @@ imageModule.controller('ImageController', function ($rootScope, $scope, GoogleIm
     $scope.keyword="";
     $scope.uploadedFile="";
 
-    GoogleImageService = DummyGoogleImageService;
+    //GoogleImageService = DummyGoogleImageService;
     $scope.getGooglePossibleImages = function () {
         GoogleImageService.listPossibleImages($scope.keyword).then(function (imageList) {
             $scope.possibleImages = imageList;
@@ -32,9 +32,10 @@ imageModule.controller('ImageController', function ($rootScope, $scope, GoogleIm
     function getImage() {
         if($scope.image.url.length > 0){
             var url = $scope.image.url;
-            downloadImage(url, 'tmp/image.jpg', function () {
-                console.log("done")
-                saveImage('tmp/image.jpg');
+            var fileN = 'tmp/' + $scope.image.type.replace('/', '.');
+            downloadImage(url, fileN, function () {
+                console.log("done");
+                saveImage(fileN);
             });
         }
     }
@@ -54,7 +55,6 @@ imageModule.controller('ImageController', function ($rootScope, $scope, GoogleIm
                 var fileName = fileNames[0];
                 saveImage(fileName);
             }
-
         });
     };
 
