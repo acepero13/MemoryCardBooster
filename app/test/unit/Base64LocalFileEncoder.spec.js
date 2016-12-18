@@ -14,7 +14,6 @@ describe('Test Suit Base64LocalFileEncoder', function () {
     }));
     function createFileSaver(data) {
         var fileS = new getFakeGoodFileSystem( 'test', data);
-        console.log(fileS.fileExists)
         localFileSaver = new Base64LocalFileEncoder(fileS);
     }
 

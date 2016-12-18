@@ -67,6 +67,57 @@ describe('Image Controller Errors', function () {
 
 });
 
+describe('Image Controller FileSystems', function () {
+    var scope;
+    var ctrl;
+    var q;
+    var rootScope;
+    beforeEach(module('ImageModule'));
+
+    beforeEach(inject(function ($controller, $rootScope, $q) {
+        q = $q;
+        scope = $rootScope.$new();
+        var fakeGoogleImageService = getFakeErrorImageGoogleService($q, $rootScope);
+        ctrl = $controller('ImageController', {$scope: scope, GoogleImageService: fakeGoogleImageService, DummyGoogleImageService: fakeGoogleImageService});
+        rootScope = $rootScope;
+    }));
+
+    function setCardInitData(done) {
+        scope.uploadedFile = {path: 'test1'};
+        rootScope.card = {primary_card: 'test', image: ''};
+        rootScope.card.save = function () {
+            console.log("SAVING");
+            expect(rootScope.card.image.length).toBeGreaterThan(0);
+            done();
+        }
+    }
+
+    it('should when imageDropped return encoded image', function (done) {
+        setCardInitData(done);
+        scope.getLocalFileSystem = function () {
+            var fileS = new getFakeGoodFileSystem( 'test', 'test');
+            var localFileSaver = new Base64LocalFileEncoder(fileS);
+            return localFileSaver;
+        };
+        scope.imageDropped();
+    });
+
+    it('should when imageDropped return error', function (done) {
+        setCardInitData(done);
+        scope.getLocalFileSystem = function () {
+            var fileS = new getFakeGoodFileSystem( 'test');
+            var localFileSaver = new Base64LocalFileEncoder(fileS);
+            return localFileSaver;
+        };
+        scope.imageDropped();
+        done();
+    });
+
+
+
+
+});
+
 
 function getFakeImageGoogleService($q, rootScope) {
     var FakeImageGoogleService = function () {
