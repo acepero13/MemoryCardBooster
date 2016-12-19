@@ -89,7 +89,8 @@ body{
 }
 
 #images-container{
-    margin-top: 20px;
+    margin: 20px auto;
+    width: 91%;
 }
 
 .box {
