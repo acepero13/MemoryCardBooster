@@ -24,11 +24,17 @@ cardModule.controller('CardController', function ($rootScope, $scope, CardIterat
     });
 
 
-      $scope.getNextCard = function() {
+    function getImage() {
+        if($scope.card.image != null) {
+            $scope.card.image = $scope.card.image.toString();
+        }
+    }
+
+    $scope.getNextCard = function() {
           flipToMain();
           CardIteratorRespository.getNextCard().then(function (card) {
               $scope.card = card;
-              $scope.card.image =$scope.card.image.toString();
+              getImage();
               $rootScope.card = $scope.card;
           }, function (err) {
               $scope.card = {primary_card: "", secondary_card: ""};

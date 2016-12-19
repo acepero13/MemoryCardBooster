@@ -120,3 +120,7 @@ function getCardEmptyFakeRepository($q) {
         }
     };
 }
+
+function flipToMain(){
+
+}

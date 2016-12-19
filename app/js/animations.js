@@ -15,6 +15,7 @@ function flipCard() {
 function flipToMain() {
     if(visible_side == 'secondary'){
         jQuery("#card").flip(false);
+
         visible_side = 'main';
     }
 }
@@ -22,6 +23,7 @@ jQuery( document ).ready(function() {
     // Handler for .ready() called.
     jQuery("#card").flip({
         axis: 'x',
+        speed: 200,
         trigger: 'manual' // use manual
     });
 
