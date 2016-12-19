@@ -14,16 +14,19 @@ imageModule.controller('ImageController', function ($rootScope, $scope, GoogleIm
     //GoogleImageService = DummyGoogleImageService;
     $scope.getGooglePossibleImages = function () {
         GoogleImageService.listPossibleImages($scope.keyword).then(function (imageList) {
-            $scope.possibleImages = imageList;
+            $scope.$apply(function() {
+                $scope.possibleImages = imageList;
+            });
+
         }, function (err) {
             $scope.possibleImages = [];
         });
     };
     
     $scope.selectImage = function (id) {
-        console.log("ID: " + id);
-        if(id > 0 && id < $scope.possibleImages.length){
+        if(id >= 0 && id < $scope.possibleImages.length){
             $scope.image = $scope.possibleImages[id];
+            console.log("ID: " + $scope.image);
             getImage();
 
         }
@@ -33,6 +36,8 @@ imageModule.controller('ImageController', function ($rootScope, $scope, GoogleIm
         if($scope.image.url.length > 0){
             var url = $scope.image.url;
             var fileN = 'tmp/' + $scope.image.type.replace('/', '.');
+            console.log(fileN);
+            console.log(url);
             downloadImage(url, fileN, function () {
                 console.log("done");
                 saveImage(fileN);
