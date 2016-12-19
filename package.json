@@ -10,7 +10,6 @@
     "request": "^2.79.0",
     "sequelize": "^3.27.0",
     "sqlite3": "^3.1.8"
-
   },
   "devDependencies": {
     "chai": "^3.5.0",
@@ -30,7 +29,6 @@
     "sinon-chai": "^2.8.0",
     "sqlite3": "^3.1.8"
   },
-
   "scripts": {
     "test": "./node_modules/.bin/karma start --single-run --browsers Electron"
   }

@@ -16,7 +16,7 @@ cardModule.controller('CardController', function ($rootScope, $scope, CardIterat
     });
 
     globalShortcut.register('Space', function () {
-        flipCard();
+        flipCard(($scope.card.image != null));
     });
 
     globalShortcut.register('Space', function () {
