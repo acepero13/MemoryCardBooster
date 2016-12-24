@@ -49,6 +49,17 @@ describe('Testing CardController Repository Has Next' ,function () {
         });
     });
 
+    describe('When getNextCard With image', function () {
+        it('should return image', function (done) {
+            scope.getNextCard();
+            setTimeout(function () {
+                rootScope.$apply();
+                expect(scope.card.image).toBe("Image");
+                done();
+            },5)
+        })
+    })
+
 });
 
 
@@ -91,9 +102,10 @@ describe('Testing CardController Repository Does not has Next' ,function () {
 function getCardFakeRepository($q) {
     return {
         getNextCard: function () {
+
             var defer = $q.defer();
             setTimeout(function(){
-                defer.resolve({primary_card: "Hallo1", secondary_card: "Hola1"});
+                defer.resolve({primary_card: "Hallo1", secondary_card: "Hola1",image: 'Image'});
             }, 2);
             return defer.promise;
         },

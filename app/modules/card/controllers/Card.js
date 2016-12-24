@@ -1,28 +1,16 @@
 /**
  * Created by alvaro on 12/6/16.
  */
+var base_dir = process.cwd();
 var b = require('buffer');
+require(base_dir + '/app/lib/Keyboardcontrols.js');
 cardModule.controller('CardController', function ($rootScope, $scope, CardIteratorRespository) {
       $scope.card = {primary_card: "Hallo", secondary_card: "Hola"};
       $rootScope.card = $scope.card;
-      const {globalShortcut} = require('electron').remote;
-
-      globalShortcut.register('Left', function () {
-          $scope.getPreviousCard();
-      });
-
-    globalShortcut.register('Right', function () {
-        $scope.getNextCard();
-    });
-
-    globalShortcut.register('Space', function () {
-        flipCard(($scope.card.image != null));
-    });
-
-    globalShortcut.register('Space', function () {
-        $scope.getNextCard();
-    });
-
+      init();
+      function init() {
+          new KeyboardControl($scope);
+      }
 
     function getImage() {
         if($scope.card.image != null) {
