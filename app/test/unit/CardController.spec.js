@@ -136,3 +136,7 @@ function getCardEmptyFakeRepository($q) {
 function flipToMain(){
 
 }
+
+var KeyboardControl = function(deck) {
+
+};

@@ -23,13 +23,15 @@ module.exports = function(config) {
         { pattern: "db/database.js", watched: true, included: false, served: true},
 
         {pattern: 'index.html',include:false},
-        {pattern: 'app/lib/*.js',include:false},
         {pattern: 'app/modules/card/*.js',include:false},
+
+        {pattern: 'app/modules/card/factories/*.js',include:false},
         {pattern: 'app/modules/card/controllers/*.js',include:false},
         {pattern: 'app/modules/card/services/*.js',include:false},
         {pattern: 'app/modules/card/lib/*.js',include:false},
 
         {pattern: 'app/modules/image/*.js',include:false},
+        {pattern: 'app/modules/image/factories/*.js',include:false},
         {pattern: 'app/modules/image/controllers/*.js',include:false},
         {pattern: 'app/modules/image/services/*.js',include:false},
         {pattern: 'app/modules/image/lib/*.js',include:false},

@@ -5,7 +5,10 @@ var base_path = process.cwd();
 require(base_path + '/app/modules/image/lib/FileSystem/FileSystem.js');
 require(base_path + '/app/modules/image/util/Base64LocalFileEncoder.js');
 require(base_path + '/app/modules/image/lib/ImageDownloader.js');
-imageModule.controller('ImageController', function ($rootScope, $scope, GoogleImageService, DummyGoogleImageService) {
+imageModule.controller('ImageController', function ($rootScope, $scope,
+                                                    GoogleImageService, DummyGoogleImageService,
+                                                    ElectronImageDownloaderFactory, ElectronOpenFileDialogFactory,
+                                                    ElectronFileSystemFactory) {
     $scope.possibleImages = [];
     $scope.image = null;
     $scope.keyword="";
@@ -23,19 +26,22 @@ imageModule.controller('ImageController', function ($rootScope, $scope, GoogleIm
     };
     
     $scope.selectImage = function (id) {
+        debugger;
         if(id >= 0 && id < $scope.possibleImages.length){
             $scope.image = $scope.possibleImages[id];
+            console.log($scope.image)
             getImage();
 
         }
     };
 
     function getImage() {
+        debugger;
         if($scope.image.url.length > 0){
-            var url = $scope.image.url;
             var fileN = 'tmp/' + $scope.image.type.replace('/', '.');
-            downloadImage(url, fileN, function () {
-                console.log("done");
+            var url = $scope.image.url;
+            var downloader = ElectronImageDownloaderFactory.getImageDownloader(url);
+            downloader.download(fileN, url).then(function () {
                 saveImage(fileN);
             });
         }
@@ -50,23 +56,18 @@ imageModule.controller('ImageController', function ($rootScope, $scope, GoogleIm
     };
     
     $scope.selectDialog = function () {
-        const {dialog} = require('electron').remote;
-        dialog.showOpenDialog(function (fileNames) {
-            if(fileNames.length > 0) {
-                var fileName = fileNames[0];
-                saveImage(fileName);
-            }
-        });
+        var openDialog = ElectronOpenFileDialogFactory.getOpenFileDialog();
+        openDialog.showOpenDialog().then(function (fileName) {
+            saveImage(fileName);
+        }).catch(function (err) {
+            console.log(error)
+        })
+
     };
 
-    $scope.getLocalFileSystem = function (fileName) {
-        var fileS = new FileSystem(fileName );
-        var localFileSaver = new Base64LocalFileEncoder(fileS);
-        return localFileSaver;
-    };
 
     function saveImage(fileName) {
-            var localFileSaver = $scope.getLocalFileSystem(fileName);
+            var localFileSaver = ElectronFileSystemFactory.getBase64FileSystemEncoder(fileName);
             localFileSaver.encodeFile(fileName).then(function (imageEncoded) {
             $rootScope.card.image = imageEncoded;
             $rootScope.card.save();

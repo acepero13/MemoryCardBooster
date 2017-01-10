@@ -85,11 +85,6 @@ describe('Image Controller FileSystems', function () {
 
     it('should when imageDropped return encoded image', function (done) {
         setCardInitData(done);
-        scope.getLocalFileSystem = function () {
-            var fileS = new getFakeGoodFileSystem( 'test', 'test');
-            var localFileSaver = new Base64LocalFileEncoder(fileS);
-            return localFileSaver;
-        };
         scope.imageDropped();
     });
 
@@ -102,6 +97,20 @@ describe('Image Controller FileSystems', function () {
         };
         scope.imageDropped();
         done();
+    });
+
+    it('should when selectDialog saveImage', function () {
+        scope.selectDialog();
+
+    });
+
+    it('should when selectImage dowloaded', function () {
+
+        scope.possibleImages = [{url: 'test0', type: 'type'},
+            {url: 'https://i.vimeocdn.com/portrait/58832_300x300', type: 'type'},
+            {url: 'test2', type: 'type'}]
+        scope.selectImage(1);
+
     });
 
 
@@ -139,4 +148,3 @@ function getFakeErrorImageGoogleService($q, rootScope) {
     };
     return new FakeImageGoogleService();
 }
-

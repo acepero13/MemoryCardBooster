@@ -1,7 +1,7 @@
 /**
  * Created by alvaro on 12/6/16.
  */
-var base_dir = process.cwd();
+
 var b = require('buffer');
 require(base_dir + '/app/lib/Keyboardcontrols.js');
 cardModule.controller('CardController', function ($rootScope, $scope, CardIteratorRespository) {

@@ -14,31 +14,32 @@ module.exports = function(config) {
 
 
     // list of files / patterns to load in the browser
-    files: [
-        { pattern: "karma.shim.js", watched: true, included: true, served: true},
-        "bower_components/jasmine-promise-matchers/dist/jasmine-promise-matchers.js",
-        {pattern: 'bower_components/angular/angular.js',include:false},
-        {pattern: 'bower_components/angular-mocks/angular-mocks.js',include:false},
-        { pattern: "db/database.js", watched: true, included: false, served: true},
+      files: [
+          { pattern: "karma.shim.js", watched: true, included: true, served: true},
+          "bower_components/jasmine-promise-matchers/dist/jasmine-promise-matchers.js",
+          {pattern: 'bower_components/angular/angular.js',include:false},
+          {pattern: 'bower_components/angular-mocks/angular-mocks.js',include:false},
+          { pattern: "db/database.js", watched: true, included: false, served: true},
 
-        {pattern: 'index.html',include:false},
-        {pattern: 'app/lib/*.js',include:false},
-        {pattern: 'app/modules/card/*.js',include:false},
-        {pattern: 'app/modules/card/controllers/*.js',include:false},
-        {pattern: 'app/modules/card/services/*.js',include:false},
-        {pattern: 'app/modules/card/lib/*.js',include:false},
+          {pattern: 'index.html',include:false},
+          {pattern: 'app/modules/card/*.js',include:false, served: true},
 
-        {pattern: 'app/modules/image/*.js',include:false},
-        {pattern: 'app/modules/image/controllers/*.js',include:false},
-        {pattern: 'app/modules/image/services/*.js',include:false},
-        {pattern: 'app/modules/image/lib/*.js',include:false},
-        {pattern: 'app/modules/image/lib/**/*.js',include:false},
-        {pattern: 'app/modules/image/util/*.js',include:false},
-        {pattern: 'app/test/unit/*.js',include:false},
-        {pattern: 'app/test/integration/*.js',include:false},
-        //'test-main.js'
+          {pattern: 'app/modules/card/factories/*.js',include:false, served: true},
+          {pattern: 'app/modules/card/controllers/*.js',include:true, served: true},
+          {pattern: 'app/modules/card/services/*.js',include:false, served: true},
+          {pattern: 'app/modules/card/lib/*.js',include:false, served: true},
 
-    ],
+          {pattern: 'app/modules/image/*.js',include:false, served: true},
+          {pattern: 'app/modules/image/factories/*.js',include:false, served: true},
+          {pattern: 'app/modules/image/controllers/*.js',include:false, served: true},
+          {pattern: 'app/modules/image/services/*.js',include:false, served: true},
+          {pattern: 'app/modules/image/lib/*.js',include:false, served: true},
+          {pattern: 'app/modules/image/lib/**/*.js',include:false, served: true},
+          {pattern: 'app/modules/image/util/*.js',include:false, served: true},
+          {pattern: 'app/test/unit/*.js',include:false, served: true},
+          {pattern: 'app/test/integration/*.js',include:false, served: true},
+
+      ],
 
       plugins: [
           'karma-electron',
@@ -91,7 +92,7 @@ module.exports = function(config) {
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-    singleRun: false,
+    singleRun: true,
 
     // Concurrency level
     // how many browser should be started simultaneous
