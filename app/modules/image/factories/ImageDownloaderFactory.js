@@ -7,7 +7,7 @@ imageModule.factory('ElectronImageDownloaderFactory', function () {
            var downloader = new ImageDownloader(url);
            return downloader;
        }
-   }
+   };
 
    return ImageDownlader;
 
