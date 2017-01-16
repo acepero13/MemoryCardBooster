@@ -57,11 +57,9 @@ imageModule.controller('ImageController', function ($rootScope, $scope,
     
     $scope.selectDialog = function () {
         var openDialog = ElectronOpenFileDialogFactory.getOpenFileDialog();
-        openDialog.showOpenDialog().then(function (fileName) {
+        openDialog.showOpenDialog(function (fileName) {
             saveImage(fileName);
-        }).catch(function (err) {
-            console.log(error)
-        })
+        });
 
     };
 

@@ -17,14 +17,14 @@ OpenDialog.prototype = {
         })
     },
 
-    showOpenDialog: function () {
+    showOpenDialog: function (callback) {
         dialog.showOpenDialog(function (fileNames) {
-            if(fileNames.length > 0) {
+            if(fileNames && fileNames.length > 0) {
                 var fileName = fileNames[0];
-                return this.openedFileName(null, fileName);
+                return callback(fileName);
             }else{
-                return this.openedFileName(new Error('No file selected'), null);
+                return new Error('No file selected');
             }
         });
     }
-}
+};

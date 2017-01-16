@@ -23,7 +23,6 @@ KeyboardControl.prototype = {
     },
 
     register: function () {
-        console.log(this.deck);
         globalShortcut.register('Left',  this.moveLeft.bind(null, this.deck));
         globalShortcut.register('Right', this.moveRight.bind(null, this.deck));
         globalShortcut.register('Space', this.turnCard.bind(null, this.deck));
