@@ -16,9 +16,12 @@ describe('Integration Testing CardController ' ,function () {
     }));
 
     beforeEach(function (done) {
-        fillCardController().then(function () {
-            done();
-        });
+        emptyTable().then(function () {
+            fillCardController().then(function () {
+                done();
+            });
+        })
+
     });
 
 
@@ -43,26 +46,26 @@ describe('Integration Testing CardController ' ,function () {
                 rootScope.$apply();
                 expect(scope.card.primary_card).toBe("Card 1");
                 done();
-            },5)
+            },15)
 
         });
 
     });
 
-    describe('When getPreviousCard and Empty CardDeck', function () {
-        it('should have a new Card defined', function (done) {
+    describe('When getPreviousCard of an  Empty CardDeck', function () {
+        it('should have empty card', function (done) {
             scope.getPreviousCard();
             setTimeout(function () {
                 scope.getPreviousCard();
                 rootScope.$apply();
                 expect(scope.card.primary_card).toBe("");
                 done();
-            },5)
+            },15)
         });
     });
 
 
-    describe('When getPreviousCard', function () {
+    describe('When getPreviousCard after moving foward deck', function () {
         it('should have a first Card', function (done) {
             scope.getNextCard();
             setTimeout(function () {
@@ -71,14 +74,14 @@ describe('Integration Testing CardController ' ,function () {
                 rootScope.$apply();
                 expect(scope.card.primary_card).toBe("Card 1");
                 done();
-            },10)
+            },15)
 
         });
 
     });
 
-    describe('When getPreviousCard', function () {
-        it('should have a first Card', function (done) {
+    describe('When getPreviousCard of empty deck', function () {
+        it('should have default Card', function (done) {
             scope.getNextCard();
             setTimeout(function () {
                 scope.getPreviousCard();
@@ -86,7 +89,7 @@ describe('Integration Testing CardController ' ,function () {
                 scope.getPreviousCard();
                 expect(scope.card.primary_card).toBe("Hallo");
                 done();
-            },5)
+            },15)
 
         });
 
@@ -96,11 +99,12 @@ describe('Integration Testing CardController ' ,function () {
 
 function fillCardController() {
     var Card = getCard();
-    function createTwoCards() {
-        Card.build({id: 1, primary_card: 'Card 1', secondary_card: 'Seconday Card 1'}).save();
-       return  Card.build({id: 2, primary_card: 'Card 2', secondary_card: 'Seconday Card 2'}).save();
-    }
-    return Card.destroy({truncate: true}).then(createTwoCards);
+    Card.build({id: 1, primary_card: 'Card 1', secondary_card: 'Seconday Card 1'}).save();
+    return  Card.build({id: 2, primary_card: 'Card 2', secondary_card: 'Seconday Card 2'}).save();
+}
+
+function emptyTable() {
+    return Card.destroy({truncate: true});
 }
 
 function getCard() {

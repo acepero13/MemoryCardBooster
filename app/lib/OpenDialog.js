@@ -7,15 +7,6 @@ var OpenDialog = function() {
 };
 
 OpenDialog.prototype = {
-    openedFileName: function (err, fileName) {
-        return new Promise(function (resolve, reject) {
-            if(err == null){
-                resolve(fileName);
-            }else{
-                reject(err);
-            }
-        })
-    },
 
     showOpenDialog: function (callback) {
         dialog.showOpenDialog(function (fileNames) {

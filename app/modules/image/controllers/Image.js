@@ -26,17 +26,14 @@ imageModule.controller('ImageController', function ($rootScope, $scope,
     };
     
     $scope.selectImage = function (id) {
-        debugger;
         if(id >= 0 && id < $scope.possibleImages.length){
             $scope.image = $scope.possibleImages[id];
-            console.log($scope.image)
             getImage();
 
         }
     };
 
     function getImage() {
-        debugger;
         if($scope.image.url.length > 0){
             var fileN = 'tmp/' + $scope.image.type.replace('/', '.');
             var url = $scope.image.url;
@@ -65,10 +62,10 @@ imageModule.controller('ImageController', function ($rootScope, $scope,
 
 
     function saveImage(fileName) {
-            var localFileSaver = ElectronFileSystemFactory.getBase64FileSystemEncoder(fileName);
-            localFileSaver.encodeFile(fileName).then(function (imageEncoded) {
-            $rootScope.card.image = imageEncoded;
-            $rootScope.card.save();
+        var localFileSaver = ElectronFileSystemFactory.getBase64FileSystemEncoder(fileName);
+                localFileSaver.encodeFile(fileName).then(function (imageEncoded) {
+                    $rootScope.card.image = imageEncoded;
+                    $rootScope.card.save();
         }).catch(function (err) {
             console.log(err.message);
             console.log("Could not encode image")

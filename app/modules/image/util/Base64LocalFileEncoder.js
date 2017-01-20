@@ -16,7 +16,6 @@ function reportError(err) {
     })
 }
 Base64LocalFileEncoder.prototype.getFile = function () {
-    console.log(this.fileSystem);
     return this.fileSystem.fileExists()
         .then(this.tryToReadFile.bind(null, this.file_path, this.fileSystem, this.base64Promise))
         .catch(reportError);

@@ -6,7 +6,6 @@ var base_dir = process.cwd();
 var CardIterator = require(base_dir + '/app/modules/card/util/CardIterator.js');
 cardModule.service('CardIteratorRespository',    function (CardRespository, $q, $rootScope) {
     var cardDeck = [];
-    console.log(CardRespository);
     this.cardRepository = CardRespository;
 
 
@@ -15,7 +14,9 @@ cardModule.service('CardIteratorRespository',    function (CardRespository, $q, 
             then(function (cards) {
                 cardDeck = new CardIterator(cards);
                 defer.resolve(cardDeck.next());
-            });
+            }).catch(function (err) {
+                console.log(err)
+        });
     };
 
     this.getNextCard = function () {

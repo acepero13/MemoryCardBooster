@@ -20,10 +20,10 @@ cardModule.controller('CardController', function ($rootScope, $scope, CardIterat
 
     $scope.getNextCard = function() {
           flipToMain().then(function () {
-              CardIteratorRespository.getNextCard().then(function (card) {
-                  $scope.card = card;
-                  getImage();
-                  $rootScope.card = $scope.card;
+                    CardIteratorRespository.getNextCard().then(function (card) {
+                    $scope.card = card;
+                    getImage();
+                    $rootScope.card = $scope.card;
               }, function (err) {
                   $scope.card = {primary_card: "", secondary_card: ""};
               });
@@ -33,9 +33,9 @@ cardModule.controller('CardController', function ($rootScope, $scope, CardIterat
 
       $scope.getPreviousCard = function () {
           flipToMain().then(function () {
-              CardIteratorRespository.getPreviousCard().then(function (card) {
-                  $scope.card = card;
-                  $rootScope.card = $scope.card;
+                    CardIteratorRespository.getPreviousCard().then(function (card) {
+                    $scope.card = card;
+                    $rootScope.card = $scope.card;
               }, function (err) {
                   $scope.card = {primary_card: "", secondary_card: ""};
               });

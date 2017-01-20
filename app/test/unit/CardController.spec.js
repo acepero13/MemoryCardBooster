@@ -82,18 +82,26 @@ describe('Testing CardController Repository Does not has Next' ,function () {
 
 
     describe('When getNextCard', function () {
-        it('should throw Item has no next', function () {
+        it(  'should throw Item has no next', function (done) {
             scope.getNextCard();
-            rootScope.$apply();
-            expect(scope.card.primary_card).toBe("");
+            setTimeout(function () {
+                rootScope.$apply();
+                expect(scope.card.primary_card).toBe("");
+                done();
+            },5)
+
         });
     });
 
     describe('When getPreviousCard', function () {
-        it('should throw I am the first card', function () {
+        it('should throw I am the first card', function (done) {
             scope.getPreviousCard();
-            rootScope.$apply();
-            expect(scope.card.primary_card).toBe("");
+            setTimeout(function () {
+                rootScope.$apply();
+                expect(scope.card.primary_card).toBe("");
+                done();
+            },5)
+
         });
     });
 
@@ -134,7 +142,10 @@ function getCardEmptyFakeRepository($q) {
 }
 
 function flipToMain(){
+    return new Promise(function (resolve, reject) {
 
+        resolve();
+    });
 }
 
 var KeyboardControl = function(deck) {

@@ -59,7 +59,7 @@ module.exports = function(config) {
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
       preprocessors: {
           '*.js': ['electron' ],
-          'app/modules/**/!(lib)/!(*GoogleImageService).js': [ 'coverage'],
+          'app/modules/**/!(lib|factories)/!(*GoogleImageService).js': [ 'coverage'],
 
       },
 
