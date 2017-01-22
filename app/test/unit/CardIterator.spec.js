@@ -40,36 +40,45 @@ describe('Testing CardIterator with Filled List', function () {
         var previousItem = cardIterator.previous();
         expect(cardIterator.index).toBe(1);
         expect(previousItem).toBe('Item1');
+        var error = false;
         try {
             cardIterator.previous();
         }catch (err){
             console.log(err.message)
             expect(err.message).toBe('Item has no previous');
+            error = true;
         }
+        expect(error).toBe(true);
 
 
     });
 
     it('Previous should throw  Item has no previous exception', function () {
        cardIterator.next();
+       var error = false;
         try {
             cardIterator.previous();
         }catch (err){
             console.log(err.message)
             expect(err.message).toBe('Item has no previous');
+            error = true;
         }
+        expect(error).toBe(true);
 
     });
 
     it('Previous should throw  Item has no next exception', function () {
         cardIterator.next();
         cardIterator.next();
+        var error = false;
         try {
             cardIterator.next();
         }catch (err){
             console.log(err.message)
             expect(err.message).toBe('Item has no next');
+            error = true;
         }
+        expect(error).toBe(true);
 
 
     });

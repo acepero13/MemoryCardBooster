@@ -20,6 +20,7 @@ module.exports = function(config) {
           {pattern: 'bower_components/angular/angular.js',include:false},
           {pattern: 'bower_components/angular-mocks/angular-mocks.js',include:false},
           { pattern: "db/database.js", watched: true, included: false, served: true},
+          {pattern: 'app/lib/*.js',include:false, served: true},
 
           {pattern: 'index.html',include:false},
           {pattern: 'app/modules/card/*.js',include:false, served: true},

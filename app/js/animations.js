@@ -12,7 +12,7 @@ function flipCard(has_image) {
             jQuery('#secondary-text').css('display', 'none');
             previous_timeout = setTimeout(function () {
                 jQuery('#secondary-text').css('display', 'block');
-                jQuery('#secondary-text').css({transition: 'background-color 1s ease-in-out', 'background-color': 'black'})
+                jQuery('#secondary-text').css({transition: 'background-color 1s ease-in-out', 'background-color': 'black'});
             }, 2000)
 
         }
