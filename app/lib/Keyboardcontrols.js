@@ -3,14 +3,17 @@
  */
 var {globalShortcut} = require('electron').remote;
 var KeyboardControl = function(deck) {
+    console.log(flipper);
+    deck.flipper.setNewCard(deck.card);
     this.deck = deck;
+    var flipper;
     this.register();
+
 };
 
 KeyboardControl.prototype = {
 
     moveRight: function (deck) {
-        console.log(this.deck);
         deck.getNextCard()
     },
 
@@ -19,7 +22,9 @@ KeyboardControl.prototype = {
     },
 
     turnCard: function (deck) {
-        flipCard((deck.card.image != null));
+
+        deck.flipper.flip();
+        //flipCard((deck.card.image != null));
     },
 
     register: function () {

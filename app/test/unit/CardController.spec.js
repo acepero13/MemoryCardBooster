@@ -143,7 +143,6 @@ function getCardEmptyFakeRepository($q) {
 
 function flipToMain(){
     return new Promise(function (resolve, reject) {
-
         resolve();
     });
 }

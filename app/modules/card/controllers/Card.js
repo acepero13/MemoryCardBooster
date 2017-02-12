@@ -4,13 +4,14 @@
 
 var b = require('buffer');
 require(base_dir + '/app/lib/Keyboardcontrols.js');
-initTTS();
+initTTS();//TODO: Change to a init file
 var tts;
-cardModule.controller('CardController', function ($rootScope, $scope, CardIteratorRespository) {
+cardModule.controller('CardController', function ($rootScope, $scope, CardIteratorRespository, CardFlipperFactory) {
       $scope.card = {primary_card: "Hallo", secondary_card: "Hola"};
       $rootScope.card = $scope.card;
       init();
       function init() {
+          $scope.flipper = CardFlipperFactory.getCardFlipper();
           new KeyboardControl($scope);
       }
 
@@ -21,12 +22,14 @@ cardModule.controller('CardController', function ($rootScope, $scope, CardIterat
     }
 
     $scope.getNextCard = function() {
-          flipToMain().then(function () {
+        $scope.flipper.resetCard().then(function () {
+                    $scope.shown_card = $scope.card.primary_card;
                     CardIteratorRespository.getNextCard().then(function (card) {
                     $scope.card = card;
+                    $scope.flipper.setNewCard(card);
                     getImage();
                     $rootScope.card = $scope.card;
-                    tryToSpeak($scope.card.primary_card, 'de');
+                    $scope.tryToSpeak($scope.card.primary_card, 'de');
               }, function (err) {
                   $scope.card = {primary_card: "", secondary_card: ""};
               });
@@ -35,17 +38,27 @@ cardModule.controller('CardController', function ($rootScope, $scope, CardIterat
       };
 
       $scope.getPreviousCard = function () {
-          flipToMain().then(function () {
+          $scope.flipper.resetCard().then(function () {
+                    $scope.shown_card = $scope.card.primary_card;
                     CardIteratorRespository.getPreviousCard().then(function (card) {
                     $scope.card = card;
+                    $scope.flipper.setNewCard(card);
                     $rootScope.card = $scope.card;
-                    tryToSpeak($scope.card.primary_card, 'de');
+                    $scope.tryToSpeak($scope.card.primary_card, 'de');
               }, function (err) {
                   $scope.card = {primary_card: "", secondary_card: ""};
               });
           });
 
       };
+
+
+
+    $scope.tryToSpeak = function(word, lang) {
+        if(window.process.env.debug != 'true') {
+            tts.speak(word, lang);
+        }
+    }
 
 
 });
@@ -57,9 +70,5 @@ function initTTS() {
     }
 }
 
-function tryToSpeak(word, lang) {
-    if(window.process.env.debug != 'true') {
-        tts.speak(word, lang);
-    }
-}
+
 

@@ -80,8 +80,5 @@ describe('Integration Testing ResponsiveTTS ' ,function () {
 
     });
 
-    it('should speak english when speak', function () {
-        var text = 'Hello world';
-        responsive.speak(text, 'en' );
-    });
+
 });

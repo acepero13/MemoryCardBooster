@@ -18,6 +18,7 @@ body{
     font-size: 35px;
     text-align: center;
     background: brown;
+    position: relative;
 
 
 }
@@ -34,6 +35,7 @@ body{
 .word-container{
     display:table-cell;
     vertical-align:middle;
+
 }
 
 #dock-header{
@@ -129,3 +131,14 @@ box .box__icon {
 {
     color: #39bfd3;
 }
+
+.play-word{
+    color: white;
+    font-size: 28px;
+    position: absolute;
+    bottom: 1px;
+    right: 8px;
+    z-index: 100;
+    mix-blend-mode: difference;
+}
+
