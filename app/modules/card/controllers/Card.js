@@ -29,7 +29,6 @@ cardModule.controller('CardController', function ($rootScope, $scope, CardIterat
                     $scope.flipper.setNewCard(card);
                     getImage();
                     $rootScope.card = $scope.card;
-                    $scope.tryToSpeak($scope.card.primary_card, 'de');
               }, function (err) {
                   $scope.card = {primary_card: "", secondary_card: ""};
               });
@@ -44,7 +43,6 @@ cardModule.controller('CardController', function ($rootScope, $scope, CardIterat
                     $scope.card = card;
                     $scope.flipper.setNewCard(card);
                     $rootScope.card = $scope.card;
-                    $scope.tryToSpeak($scope.card.primary_card, 'de');
               }, function (err) {
                   $scope.card = {primary_card: "", secondary_card: ""};
               });
@@ -54,10 +52,8 @@ cardModule.controller('CardController', function ($rootScope, $scope, CardIterat
 
 
 
-    $scope.tryToSpeak = function(word, lang) {
-        if(window.process.env.debug != 'true') {
-            tts.speak(word, lang);
-        }
+    $scope.speakWord = function(word, lang) {
+        tryToSpeak(word, lang)
     }
 
 
@@ -67,6 +63,12 @@ function initTTS() {
     if(window.process.env.debug != 'true') {
         require(base_dir + '/app/lib/ResponsiveTTSVoice.js');
         tts = new ResponsiveTTSVoice();
+    }
+}
+
+function tryToSpeak(word, lang){
+    if(window.process.env.debug != 'true') {
+        tts.speak(word, lang);
     }
 }
 

@@ -41,6 +41,7 @@
 
         <script src="app/modules/card/factories/TTSFactory.js"></script>
         <script src="app/modules/card/util/CardFlipper.js"></script>
+        <script src="app/modules/card/util/CardBackwardFlipper.js"></script>
         <script src="app/modules/card/factories/CardFlipperFactory.js"></script>
 
     <script>if (window.module) module = window.module;</script>
@@ -85,14 +86,14 @@
                 <div class="word-container">
                     <h1 class="main-word">{{card.primary_card}}</h1>
                 </div>
-                <div class="play-word"> <i class="fa fa-volume-down" aria-hidden="true"></i> </div>
+                <div class="play-word" ng-click="speakWord(card.primary_card, 'de')"> <i class="fa fa-volume-down" aria-hidden="true"></i> </div>
             </div>
 
             <div id="secondary-card" class="back">
                 <div class="word-container" style='background: url("data:image/jpeg;base64,{{card.image}}") no-repeat; background-size: 100%    100%'>
                     <h1 class="main-word" id="secondary-text">{{card.secondary_card}}</h1>
                 </div>
-                <div class="play-word" ng-click="alert(1)">
+                <div class="play-word" ng-click="speakWord(card.secondary_card, 'es')">
                     <i class="fa fa-volume-down" aria-hidden="true"></i>
                 </div>
             </div>

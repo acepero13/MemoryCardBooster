@@ -40,6 +40,23 @@ function flipToSecondary() {
     return flippedPromise();
 }
 
+function flipToSecondaryAsMain() {
+    try{
+        jQuery("#card").flip(true);
+        jQuery('.main-word').addClass('black-background');
+    }catch ( e){
+    }
+    return new Promise(function (resolve, reject) {resolve();});
+}
+
+function removeBlackFromLetters() {
+    jQuery('.main-word').addClass('black-background');
+}
+
+function addBlackToLetters() {
+    jQuery('.main-word').removeClass('black-background');
+}
+
 
 jQuery( document ).ready(function() {
     jQuery("#card").flip({
